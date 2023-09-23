@@ -5,7 +5,7 @@
 
 ### 主要步骤和代码：
 
-#### 1. 声明并初始化所需数据(文章列表、文章、点赞数、是否点赞)
+1. #### 声明并初始化所需数据(文章列表、文章、点赞数、是否点赞)
 
 ```javascript
 data() {
@@ -40,9 +40,9 @@ data() {
         }
 ```
 
-#### 2. 显示内容
+2. #### 显示内容
 
-##### - 显示文章列表
+- ##### 显示文章列表
 
 ```html
 <el-aside>
@@ -54,7 +54,7 @@ data() {
 </el-aside>
 ```
 
-##### - 显示文章和点赞数
+- ##### 显示文章和点赞数
 
 ```html
 <el-container>
@@ -73,9 +73,9 @@ data() {
     </el-container>
 ```
 
-#### 3. 执行点击事件
+3. #### 执行点击事件
 
-##### - 点击侧边栏的文章列表，切换文章。
+- ##### 点击侧边栏的文章列表，切换文章。
 
 ```html
 <el-menu-item :index="index" v-for="(item, index) in articles" @click="changeContent(item,index)">
@@ -94,7 +94,7 @@ changeContent(item,index) {
 }
 ```
 
-##### - 点击点赞按钮，若已点赞，点赞数增加一，否则减少一。
+- ##### 点击点赞按钮，若已点赞，点赞数增加一，否则减少一。
 
 ```html
 <el-button @click="doLike" circle>
