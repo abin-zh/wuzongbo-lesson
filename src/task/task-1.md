@@ -70,7 +70,7 @@ data() {
                 <el-text>{{ like }}</el-text>
             </el-space>
         </el-footer>
-    </el-container>
+</el-container>
 ```
 
 3. #### 执行点击事件
