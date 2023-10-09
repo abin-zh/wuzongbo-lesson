@@ -1,5 +1,5 @@
 <template>
-    <div class="aside-menu-vt">
+    <div class="aside-menu-hr">
         <el-affix :offset="0">
             <el-dropdown>
                 <font-awesome-icon icon="fa-solid fa-bars" size="xl"/>
@@ -12,7 +12,7 @@
         </el-affix>
     </div>
     <el-container>
-        <el-aside class="aside-menu-hr">
+        <el-aside class="aside-menu-vt">
             <el-menu mode="vertical" :default-active="currenIndex">
                 <el-menu-item :index="index" v-for="(item, index) in articles" @click="changeContent(item, index)">
                     {{ item.shortTitle }}
@@ -20,7 +20,7 @@
             </el-menu>
         </el-aside>
         <el-container>
-            <el-main>
+            <el-main class="content">
                 <el-text>{{ content }}</el-text>
             </el-main>
             <el-footer>
@@ -105,16 +105,12 @@ export default {
 
 
 <style scoped>
-.el-aside {
-    padding: 48px 32px 0 0;
-}
+    .el-aside {
+        padding: 48px 32px 0 0;
+    }
 
-.el-main {
-    padding: 55px 20px 0 20px;
-}
-
-.el-aside,
-.el-menu {
-    border: 0;
-}
+    .el-aside,
+    .el-menu {
+        border: 0;
+    }
 </style>

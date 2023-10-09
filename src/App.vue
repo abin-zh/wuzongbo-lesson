@@ -1,6 +1,6 @@
 <template>
     <el-container>
-        <el-header>
+        <el-header class="header">
             <el-menu :default-active="activeIndex" mode="horizontal" :ellipsis="false" router>
                 <el-menu-item>
                     <div>
@@ -9,7 +9,9 @@
                 </el-menu-item>
                 <div class="flex-grow" />
                 <el-menu-item index="/">首页</el-menu-item>
-                <el-menu-item index="/about">关于</el-menu-item>
+                <el-menu-item index="/user/login">
+                    登录
+                </el-menu-item>
                 <!-- 切换主题 -->
                 <el-menu-item>
                     <div>
@@ -26,7 +28,7 @@
                 </el-menu-item>
             </el-menu>
         </el-header>
-            <router-view></router-view>
+        <router-view></router-view>
     </el-container>
 </template>
 
@@ -37,13 +39,13 @@ const isDark = useDark()
 
 export default {
     name: 'App',
-    created(){
+    created() {
         this.activeIndex = '/';
     },
     data() {
         return {
             swiDark: ref(isDark.value),
-            activeIndex:'/'
+            activeIndex: '/'
         }
     },
     methods: {
@@ -57,21 +59,5 @@ export default {
 </script>
 
 <style>
-    .el-container {
-        width: 100%;
-        height: 100%;
-    }
-
-    .el-header,
-    .el-main {
-        padding: 0;
-    }
-
-    .el-menu {
-        padding: 0 32px;
-    }
-
-    .flex-grow {
-        flex-grow: 1;
-    }
+    @import '@/assets/base.css';
 </style>
