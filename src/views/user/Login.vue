@@ -16,9 +16,9 @@
                 </el-form>
             </div>
             <div class="link">
-                <router-link to="">忘记密码?</router-link>
+                <router-link to="/">忘记密码?</router-link>
                 <el-divider direction="vertical" />
-                <router-link to="/user/login">登录</router-link>
+                <router-link to="/user/register">注册</router-link>
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@ export default {
         width: 100%;
     }
 
-    .router-link-active{
+    a{
         text-decoration: none;
         font-size: 12px;
         color: var(--el-text-color);
