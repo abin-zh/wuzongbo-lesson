@@ -15,9 +15,10 @@ instance.interceptors.request.use((config) => {
 });
 
 instance.interceptors.response.use((res) => {
+    //直接获取响应数据
     return res.data;
 },(err) => {
-    return Promise.reject(err);
+    return Promise.reject(err.response.data);
 })
 
 export default instance;

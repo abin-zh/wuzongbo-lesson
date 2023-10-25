@@ -12,8 +12,12 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 
+import { ElMessage } from 'element-plus';
 //element-plus 暗黑主题 https://element-plus.org/zh-CN/guide/dark-mode.html#%E5%A6%82%E4%BD%95%E5%90%AF%E7%94%A8%EF%BC%9F
 import 'element-plus/theme-chalk/dark/css-vars.css';
+//引入message组件样式
+import 'element-plus/theme-chalk/src/message-box.scss';
+import 'element-plus/theme-chalk/src/message.scss';
 
 library.add(fab,far,fas);
 
