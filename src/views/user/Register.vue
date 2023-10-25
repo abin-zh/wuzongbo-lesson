@@ -97,6 +97,7 @@
     };
 
     //表单校验规则
+    //https://blog.csdn.net/weixin_43405300/article/details/132326466
     const regRule = {
         email:[
             {required: true,message:'请输入邮箱',triger:'blur'},
