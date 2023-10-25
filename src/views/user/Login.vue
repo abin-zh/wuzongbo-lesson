@@ -54,6 +54,7 @@
     const login = (formRef) => {
         formRef.validate((valid) => {
             if (valid) {
+                //提交登录信息(@/http/user function:userLogin)
                 userLogin(logindata).then(res => { 
                     //登录成功后的操作
                     if(res.success == true && res.code == 1){
