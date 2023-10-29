@@ -28,9 +28,14 @@
     import { ref,reactive } from 'vue';
     import { userLogin } from '@/http/user';
     import { useRouter } from 'vue-router';
+    import { useUserStore } from '@/stores/user';
 
     const router = useRouter();
 
+    //使用user状态
+    const userStore = useUserStore();
+    
+    
     //响应式数据
     const logindata = reactive({
         email: '',
@@ -59,6 +64,8 @@
                 userLogin(logindata).then(res => { 
                     //登录成功后的操作
                     if(res.success == true && res.code == 1){
+                        //登录成功,存储user状态
+                        userStore.setUser(res.data.userinfo);
                         ElMessage({message: '登录成功',type: 'success',offset:100});
                         //跳转
                         router.push('/user/mine');
