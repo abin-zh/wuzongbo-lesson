@@ -24,13 +24,27 @@ const router = createRouter({// 内部提供了 history 模式的实现。为了
 });
 
 router.beforeEach((to, from, next) => {
-
     const userStore = useUserStore();
     const token = userStore.user.token;
 
-    if (to.name !== 'login' && token == '') { next({ name: 'login' }) }
-    else next()
-
+    if (token == '') { 
+        //无token,只允许访问登录和注册页面(暂时)
+        if (to.path == '/user/login' || to.path == '/user/register') {
+            //登录、注册页面放行
+            next();
+        }else{
+            //其他页面跳转到登录页
+            next('/user/login');
+        }
+    }else{
+        if(to.path == '/user/login' || to.path == '/user/register'){
+            //登录后，不允许重复登录注册(暂时)
+            next(from.path);
+        }else{
+            //登录后，其他页面放行
+            next();
+        }
+    }
 });
 
 //导出路由

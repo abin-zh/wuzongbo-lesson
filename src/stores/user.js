@@ -18,7 +18,10 @@ export const useUserStore = defineStore('user', {
     actions: {
         setUser(user) {
             this.user = user
+        },
+        //获取用户信息
+        getUserInfo(){
+            return this.user
         }
-
     }
 })
