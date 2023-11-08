@@ -1,8 +1,8 @@
 <template>
     <div class="aside-menu-hr">
         <el-affix :offset="0">
-            <el-button>
-                <font-awesome-icon icon="fa-solid fa-bars" />
+            <el-button @click="back">
+                <font-awesome-icon icon="fa-solid fa-chevron-left" />
             </el-button>
         </el-affix>
     </div>
@@ -53,8 +53,6 @@ export default {
 
             const formattedTime = year + '年' + month + '月' + day + '日 ' + hours + ':' + minutes + ':' + seconds;
 
-            console.log(formattedTime);
-
             this.createTime = formattedTime;
             // 输出: 2023-11-07 03:37:43
 
@@ -66,6 +64,11 @@ export default {
             user: {},
             createTime: "",
             article: {}
+        }
+    },
+    methods: {
+        back() {
+            this.$router.back();
         }
     }
 }

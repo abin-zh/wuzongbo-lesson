@@ -68,7 +68,7 @@
                         userStore.setUser(res.data.userinfo);
                         ElMessage({message: '登录成功',type: 'success',offset:100});
                         //跳转
-                        router.push('/user/mine');
+                        router.push('/');
                     }else{
                         ElMessage({message: res.msg,type: 'warning',offset:100});
                     }
