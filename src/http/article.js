@@ -16,7 +16,16 @@ const getArticlesByCateId = (cateid) => {
     })
 }
 
+const getArticleById = (id) => {
+    return axios.request({
+        url:`/api/article/one?id=${id}`,
+        method:'get',
+    })
+
+}
+
 export {
     getAllCat,
-    getArticlesByCateId
+    getArticlesByCateId,
+    getArticleById
 }

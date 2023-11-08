@@ -8,6 +8,7 @@ import About from "@/views/About.vue";
 import Login from "@/views/user/Login.vue";
 import Register from "@/views/user/Register.vue";
 import Mine from "@/views/user/Mine.vue";
+import Article from "@/views/article/Article.vue";
 import { useUserStore } from '@/stores/user';
 
 const routes = [
@@ -15,7 +16,8 @@ const routes = [
     { path: '/about', name: 'about', component: About },
     { path: '/user/login', name: 'login', component: Login },
     { path: '/user/register', name: 'register', component: Register },
-    { path: '/user/mine', name: 'mine', component: Mine }
+    { path: '/user/mine', name: 'mine', component: Mine },
+    { path: '/article/:id', name: 'article', component: Article },
 ]
 //创建路由管理 router
 const router = createRouter({// 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
