@@ -9,7 +9,7 @@
                 </el-menu-item>
                 <div class="flex-grow" />
                 <el-menu-item index="/">首页</el-menu-item>
-                <el-sub-menu>
+                <el-sub-menu index="/user">
                     <template #title>用户</template>
                     <el-menu-item index="/user/login">登录</el-menu-item>
                     <el-menu-item index="/user/mine">我的</el-menu-item>
