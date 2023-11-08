@@ -1,14 +1,20 @@
 <template>
     <div class="aside-menu-hr">
         <el-affix :offset="0">
-            <el-dropdown>
+            <!-- <el-dropdown>
                 <font-awesome-icon icon="fa-solid fa-bars" size="xl"/>
                 <template #dropdown>
                     <el-dropdown-menu width="100%">
                         <el-dropdown-item :index="index" v-for="(item, index) in articles" @click="changeContent(item, index)">{{ item.shortTitle }}</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
-            </el-dropdown>
+            </el-dropdown> -->
+            <el-button @click="openCatDrawer">
+                <font-awesome-icon icon="fa-solid fa-bars" />
+            </el-button>
+            <el-drawer class="cat-list" v-model="catDrawer" title="文章分类" size="40%">
+                <cjb-cats :catList="catList" @curCat="changeCat"></cjb-cats>
+            </el-drawer>
         </el-affix>
     </div>
     <el-container>
@@ -21,9 +27,10 @@
         </el-aside>
         <el-container>
             <el-main class="content">
-                <el-text>{{ content }}</el-text>
+                <!-- <el-text>{{ content }}</el-text> -->
+                <cjb-articles :articles="articles"></cjb-articles>
             </el-main>
-            <el-footer>
+            <!-- <el-footer>
                 <el-space>
                     <el-button @click="doLike" circle>
                         <font-awesome-icon v-if="!isLike" icon="fa-regular fa-thumbs-up" />
@@ -31,12 +38,16 @@
                     </el-button>
                     <el-text>{{ like }}</el-text>
                 </el-space>
-            </el-footer>
+            </el-footer> -->
         </el-container>
     </el-container>
 </template>
 
 <script>
+import CjbCats from "@/components/CjbCats.vue";
+import CjbArticles from "@/components/CjbArticles.vue";
+import { getAllCat,getArticlesByCateId } from "@/http/article";
+
 export default {
     created() {
         this.currenIndex = 0;
@@ -45,12 +56,18 @@ export default {
         this.like = article.like;
         this.isLike = article.isLike;
     },
+    mounted() {
+        this.initArticle();
+    },
     data() {
         return {
             content: "",
             like: 0,
             isLike: false,
             currenIndex: 0,
+            catDrawer: false,
+            catList: [],
+            curCat: 1,
             articles: [
                 {
                     shortTitle: "Button 按钮",
@@ -98,6 +115,25 @@ export default {
             //切换页面文章数据
             this.like = article.like;
             this.isLike = article.isLike;
+        },
+        openCatDrawer() {
+            this.catDrawer = true;
+        },
+        initArticle(){
+            getAllCat().then(res => {
+                this.catList = res.data.articleCats;
+            });
+            this.changeArticles();
+        },
+        changeCat(curCat){
+            this.curCat = curCat;
+            this.changeArticles();
+            console.log(this.articles);
+        },
+        changeArticles(){
+            getArticlesByCateId(this.curCat).then(res=>{
+                this.articles = res.data.articles;
+            });
         }
     }
 }
