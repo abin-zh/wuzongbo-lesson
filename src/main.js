@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import { createPinia } from 'pinia';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 //fontawesome图标包
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -24,6 +25,7 @@ library.add(fab,far,fas);
 
 const app = createApp(App);
 const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 //确保 _use_ 路由实例使整个应用支持路由。
 // 挂载router
 app.use(router);

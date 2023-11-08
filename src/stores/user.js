@@ -22,6 +22,11 @@ export const useUserStore = defineStore('user', {
         //获取用户信息
         getUserInfo(){
             return this.user
+        },
+        //获取用户token
+        getUserToken(){
+            return this.user.token
         }
-    }
+    },
+    persist: true
 })
