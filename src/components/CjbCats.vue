@@ -1,5 +1,5 @@
 <template>
-    <div class="cjb-cat-list" @click="$emit('curCat',curCat)"> 
+    <div class="cjb-cat-list" @click="$emit('curCat',curCat)">
         <cjb-cat v-for="(item) in catList" :title="item.catName" :id="item.id" :showInNav="curCat == item.id" @changeCat="changeCat"></cjb-cat>
     </div>
 </template>
