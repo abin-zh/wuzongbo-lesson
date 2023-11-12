@@ -27,7 +27,7 @@ const router = createRouter({// 内部提供了 history 模式的实现。为了
 
 router.beforeEach((to, from, next) => {
     const userStore = useUserStore();
-    const token = userStore.getUserToken();
+    const token = userStore.getUserToken;
     
 
     if (token == '') { 

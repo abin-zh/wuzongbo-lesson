@@ -16,12 +16,12 @@
                         </el-switch>
                     </div>
                 </el-menu-item>
-                <el-sub-menu>
+                <el-sub-menu index="/user">
                     <template #title>
                         <el-avatar size="small" src="https://q.qlogo.cn/g?b=qq&nk=863030357&s=640"></el-avatar>
                     </template>
                     <el-menu-item index="/user/mine">我的</el-menu-item>
-                    <el-menu-item @click="logout">登出</el-menu-item>
+                    <el-menu-item index="logout" @click="logout">登出</el-menu-item>
                 </el-sub-menu>
             </el-menu>
         </el-header>
@@ -44,7 +44,7 @@ export default {
     computed: {
         isLogginIn() {
             const userStore = useUserStore();
-            return userStore.getUserToken() == "" ? false : true;
+            return userStore.getUserToken == "" ? false : true;
         }
     },
     data() {

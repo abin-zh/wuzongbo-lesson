@@ -12,7 +12,7 @@ const instance = axios.create({
 instance.interceptors.request.use((config) => {
     //在请求头中添加token
     const userStore = useUserStore();
-    const token = userStore.getUserToken();
+    const token = userStore.getUserToken;
 
     if(token != ''){
         config.headers.token = token;

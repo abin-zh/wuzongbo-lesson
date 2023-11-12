@@ -15,18 +15,14 @@ export const useUserStore = defineStore('user', {
             "email": ""
         }
     }),
+    getters: {
+        getUser: (state) => state.user,
+        getUserToken: (state) => state.user.token
+    },
     actions: {
         setUser(user) {
             this.user = user
         },
-        //获取用户信息
-        getUserInfo(){
-            return this.user
-        },
-        //获取用户token
-        getUserToken(){
-            return this.user.token
-        }
     },
     persist: true
 })
