@@ -13,7 +13,7 @@
                 <font-awesome-icon icon="fa-solid fa-bars" />
             </el-button>
             <el-drawer class="cat-list" v-model="catDrawer" title="文章分类" size="40%">
-                <cjb-cats :catList="catList" @curCat="changeCat"></cjb-cats>
+                <cjb-cats :catList="catList"></cjb-cats>
             </el-drawer>
         </el-affix>
     </div>
@@ -26,9 +26,12 @@
             </el-menu> -->
         </el-aside>
         <el-container>
-            <el-main class="content">
+            <el-main class="content" v-loading.fullscreen.lock="loading">
                 <!-- <el-text>{{ content }}</el-text> -->
-                <cjb-articles :articles="articles" @toArticle="toArticle"></cjb-articles>
+                <cjb-articles v-if="haveArticles" :articles="articles" @toArticle="toArticle"></cjb-articles>
+                
+                <el-result v-if="!haveArticles" icon="warning" title="OH,抱歉" sub-title="这个分类里还没有文章T-T" />
+                
             </el-main>
             <!-- <el-footer>
                 <el-space>
@@ -46,9 +49,15 @@
 <script>
 import CjbCats from "@/components/CjbCats.vue";
 import CjbArticles from "@/components/CjbArticles.vue";
-import { getAllCat,getArticlesByCateId } from "@/http/article";
+import { getAllCat, getArticlesByCateId } from "@/http/article";
+import { useArticleStore } from "@/stores/article";
 
 export default {
+    watch: {
+        changeCatId() {
+            this.changeArticles();
+        }
+    },
     created() {
         // this.currenIndex = 0;
         // let article = this.articles[this.currenIndex];
@@ -67,8 +76,9 @@ export default {
             currenIndex: 0,
             catDrawer: false,
             catList: [],
-            curCat: 1,
-            articles: []
+            articles: [],
+            articleStore: useArticleStore(),
+            loading: false
             // articles: [
             //     {
             //         shortTitle: "Button 按钮",
@@ -92,6 +102,16 @@ export default {
             //         isLike: false
             //     }
             // ]
+        }
+    },
+    //computed和data中的数据其实是一样的,都具有响应式。
+    //只不过computed是基于它的依赖缓存的，只有相关依赖发生改变时才会重新取值。
+    computed: {
+        changeCatId() {
+            return this.articleStore.getCurCatId;
+        },
+        haveArticles() {
+            return this.articles.length > 0;
         }
     },
     methods: {
@@ -120,25 +140,25 @@ export default {
         openCatDrawer() {
             this.catDrawer = true;
         },
-        initArticle(){
+        initArticle() {
             getAllCat().then(res => {
                 this.catList = res.data.articleCats;
             });
             this.changeArticles();
         },
-        changeCat(curCat){
-            this.curCat = curCat;
-            this.changeArticles();
-        },
-        changeArticles(){
-            getArticlesByCateId(this.curCat).then(res=>{
-                if(res.success && res.code == 1){
+        changeArticles() {
+            //重置文章列表
+            this.loading = true;
+            this.articles = [];
+            getArticlesByCateId(this.articleStore.getCurCatId).then(res => {
+                if (res.success && res.code == 1) {
                     this.articles = res.data.articles;
                 }
+                this.loading = false;
             });
         },
-        toArticle(id){
-            this.$router.push({path: `/article/${id}`});
+        toArticle(id) {
+            this.$router.push({ path: `/article/${id}` });
         }
     }
 }
@@ -146,12 +166,12 @@ export default {
 
 
 <style scoped>
-    .el-aside {
-        padding: 48px 32px 0 0;
-    }
+.el-aside {
+    padding: 48px 32px 0 0;
+}
 
-    .el-aside,
-    .el-menu {
-        border: 0;
-    }
+.el-aside,
+.el-menu {
+    border: 0;
+}
 </style>

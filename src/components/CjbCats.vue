@@ -1,17 +1,13 @@
 <template>
-    <div class="cjb-cat-list" @click="$emit('curCat',curCat)">
-        <cjb-cat v-for="(item) in catList" :title="item.catName" :id="item.id" :showInNav="curCat == item.id" @changeCat="changeCat"></cjb-cat>
+    <div class="cjb-cat-list">
+        <cjb-cat v-for="(item) in catList" :title="item.catName" :id="item.id" :showInNav="item.id == curCatid"></cjb-cat>
     </div>
 </template>
 
 <script>
 import CjbCat from "@/components/CjbCat.vue";
+import { useArticleStore } from "@/stores/article";
 export default {
-    data() {
-        return {
-            curCat: 1,
-        }
-    },
     props: {
         catList: {
             type: Array,
@@ -21,11 +17,12 @@ export default {
             }
         },
     },
-    methods: {
-        changeCat(id) {
-            this.curCat = id;
+    computed: {
+        curCatid() {
+            const articleStore = useArticleStore();
+            return articleStore.getCurCatId;
         }
-    }
+    },
 }
 </script>
 
